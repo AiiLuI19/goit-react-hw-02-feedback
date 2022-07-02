@@ -3,6 +3,7 @@ import Statistics from 'components/Statistics/Statistics';
 import FeedbackOptions from './components/Statistics/FeedbackOptions';
 import Notification from './components/Statistics/Notification';
 import Section from 'components/Statistics/Section';
+import s from './components/Statistics/Statistics.module.css';
 class App extends Component {
   state = {
     good: 0,
@@ -36,7 +37,7 @@ class App extends Component {
     const percentage = this.countPositiveFeedbackPercentage();
 
     return (
-      <div className="wrap">
+      <div className={s.wrap}>
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
             onGood={this.addGood}
