@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import s from './Statistics.module.css';
-const Statistics = ({ good, bad, neutral, total, positivePercentage }) => (
+const Statistics = ({ types, state, total, positivePercentage }) => (
   <div>
     <ul className={s.listWrap}>
-      <li>Good: {good}</li>
+      {types.map(type => (
+        <li key={type}>
+          {type}: {state[type]}
+        </li>
+      ))}
+      {/* <li>Good: {good}</li>
       <li>Neutral: {neutral}</li>
-      <li>Bad: {bad}</li>
+      <li>Bad: {bad}</li> */}
       <li>Total: {total}</li>
       <li>Positive feedback: {positivePercentage}%</li>
     </ul>

@@ -2,24 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import s from './Statistics.module.css';
 
-const FeedbackOptions = ({ onGood, onNeutral, onBad }) => (
-  <ul className={s.list}>
-    <li className={s.item}>
-      <button className={s.button} type="button" onClick={onGood}>
-        Good
-      </button>
-    </li>
-    <li className={s.item}>
-      <button className={s.button} type="button" onClick={onNeutral}>
-        Neutral
-      </button>
-    </li>
-    <li className={s.item}>
-      <button className={s.button} type="button" onClick={onBad}>
-        Bad
-      </button>
-    </li>
-  </ul>
+const FeedbackOptions = ({ btnTypes, onIncrement }) => (
+  <>
+    <ul className={s.list}>
+      {btnTypes.map((btnType, index) => {
+        return (
+          <li key={index} className={s.item}>
+            <button
+              type="button"
+              className={s.button}
+              onClick={() => onIncrement(btnType)}
+            >
+              {btnType}
+            </button>{' '}
+          </li>
+        );
+      })}
+    </ul>
+  </>
 );
 FeedbackOptions.propType = {
   onGood: PropTypes.func.isRequired,

@@ -10,16 +10,20 @@ class App extends Component {
     neutral: 0,
     bad: 0,
   };
-
-  addGood = () => {
-    this.setState(prevState => ({ good: prevState.good + 1 }));
+  increment = type => {
+    this.setState(prevState => ({
+      [type]: prevState[type] + 1,
+    }));
   };
-  addNeutral = () => {
-    this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
-  };
-  addBad = () => {
-    this.setState(prevState => ({ bad: prevState.bad + 1 }));
-  };
+  // addGood = () => {
+  //   this.setState(prevState => ({ good: prevState.good + 1 }));
+  // };
+  // addNeutral = () => {
+  //   this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
+  // };
+  // addBad = () => {
+  //   this.setState(prevState => ({ bad: prevState.bad + 1 }));
+  // };
 
   countTotalFeedback() {
     return Object.values(this.state).reduce((total, currentValue) => {
@@ -32,7 +36,8 @@ class App extends Component {
   }
 
   render() {
-    const { good, neutral, bad } = this.state;
+    // const { good, neutral, bad } = this.state;
+    const types = Object.keys(this.state);
     const total = this.countTotalFeedback();
     const percentage = this.countPositiveFeedbackPercentage();
 
@@ -40,9 +45,11 @@ class App extends Component {
       <div className={s.wrap}>
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
-            onGood={this.addGood}
-            onNeutral={this.addNeutral}
-            onBad={this.addBad}
+            // onGood={this.addGood}
+            // onNeutral={this.addNeutral}
+            // onBad={this.addBad}
+            btnTypes={types}
+            onIncrement={this.increment}
           />
         </Section>
         {total === 0 ? (
@@ -51,9 +58,11 @@ class App extends Component {
           <>
             <Section title={'Statistics'}>
               <Statistics
-                good={good}
-                neutral={neutral}
-                bad={bad}
+                // good={good}
+                // neutral={neutral}
+                // bad={bad}
+                state={this.state}
+                types={types}
                 total={total}
                 positivePercentage={percentage}
               />
